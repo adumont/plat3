@@ -1,24 +1,10 @@
+namespace SpriteKind {
+    export const Monkey = SpriteKind.create()
+}
 function createLevel () {
     if (Level == 0) {
         scene.setBackgroundColor(9)
-        tiles.setTilemap(tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200050000000000000000000303030303030403000000000000000000000000000004000000000000000000000000000000040000000000000000000000000000050400000000000000000000000000030403030100000000020500000000000004000003030000030304030300000000040000000000000000040000000000000400000000000000000400000000000004000000000000000004000000000000040000000000000000000000000000000000000707070707070707070707070707070706060606060606060606060606060606`, img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . 2 2 2 2 2 2 . 2 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . 2 . 2 2 
-            . . . . . . . . . . . . . . . . 
-            2 2 . . 2 2 . 2 2 . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            2 2 2 2 2 2 2 2 . . . . 2 2 2 2 
-            `, [myTiles.transparency16,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8], TileScale.Sixteen))
+        tiles.setTilemap(tilemap`level`)
         createPlayer()
         createMonkeys()
     }
@@ -42,13 +28,18 @@ function createMonkeys () {
             . f b d f d b f b b f e f f e f 
             . f d d f d d f d d b e f f f f 
             . . f f f f f f f f f f f f f . 
-            `, SpriteKind.Player)
-        tiles.placeOnTile(mySprite, value)
+            `, SpriteKind.Monkey)
+        tiles.placeOnTile(Monkey, value)
         tiles.setTileAt(value, myTiles.transparency16)
-        mySprite.setFlag(SpriteFlag.BounceOnWall, true)
-        mySprite.vx = -10
+        Monkey.setFlag(SpriteFlag.BounceOnWall, true)
+        Monkey.vx = -10
     }
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (mySprite.vy == 0 && !(mySprite.tileKindAt(TileDirection.Center, myTiles.tile5))) {
+        mySprite.vy = -150
+    }
+})
 function createPlayer () {
     mySprite = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -70,8 +61,8 @@ function createPlayer () {
         `, SpriteKind.Player)
     scene.cameraFollowSprite(mySprite)
     tiles.placeOnRandomTile(mySprite, myTiles.tile1)
-    for (let value of tiles.getTilesByType(myTiles.tile1)) {
-        tiles.setTileAt(value, myTiles.transparency16)
+    for (let value2 of tiles.getTilesByType(myTiles.tile1)) {
+        tiles.setTileAt(value2, myTiles.transparency16)
     }
     controller.moveSprite(mySprite, 100, 0)
     mySprite.ay = 300

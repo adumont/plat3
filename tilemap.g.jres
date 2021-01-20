@@ -15,7 +15,7 @@
         "tilemapTile": true
     },
     "tile3": {
-        "data": "hwQQABAAAAB37u7u7u4OAHfu7u7u7u4Ad+7e7u7u7g535+7u7u7uAHfn7u7u7e4Ad+7u7u7u7gDn7u7u7u4OAOfu7u7u7u4A5+7u7u7uDgDn7t7u7u4OAHfu7u7u7u4A5+fu7u7u7QDn7u7u7u7uAOfu7u7e7u4Od+7u7u7u7g53d+7u7u4OAA==",
+        "data": "hwQQABAAAAB37u7u7u4OAHfu7u7u7u4Ad+7e7u7u7g535+7u7u7uDnfn7u7u7e4Ad+7u7u7u7gDn7u7u7u7uAOfu7u7u7u4A5+7u7u7uDgDn7t7u7u4OAHfu7u7u7u4A5+fu7u7u7QDn7u7u7u7uAOfu7u7e7u4Od+7u7u7u7g53d+7u7u4OAA==",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     },
@@ -43,6 +43,21 @@
         "data": "hwQQABAAAAAAAACAZmZmZgAAAGBmZpZmAAAAYGZmZmYAAAAQZmZmZgAAAABmZmZmAAAAAGZmZmYAAAAAYZZmZgAAAABgZmZmAAAAAGhmZmYAAAAAZmZmZgAAAABmZmZmAAAAAGZmZmYAAAAAZmZmZgAAAABhZmlmAAAAAGBmZmYAAAAAZmZmZg==",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
+    },
+    "level": {
+        "id": "level",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAxMDAwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDUwMDAwMDAwMDAwMDAwMDAwMDAwMzAzMDMwMzAzMDMwNDAzMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA0MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDUwNDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMwNDAzMDMwMTAwMDAwMDAwMDIwNTAwMDAwMDAwMDAwMDA0MDAwMDAzMDMwMDAwMDMwMzA0MDMwMzAwMDAwMDAwMDQwMDAwMDAwMDAwMDAwMDAwMDQwMDAwMDAwMDAwMDAwNDAwMDAwMDAwMDAwMDAwMDAwNDAwMDAwMDAwMDAwMDA0MDAwMDAwMDAwMDAwMDAwMDA0MDAwMDAwMDAwMDAwMDQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNzA3MDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA3MDcwNzA2MDYwNjA2MDYwNjA2MDYwNjA2MDYwNjA2MDYwNjA2MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAyMjIyMjIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAyMjIwMDAwMDAwMDAwMDAwMDAwMjIwMDIyMjAwMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIwMDAwMjIyMg==",
+        "tileset": [
+            "myTiles.transparency16",
+            "myTiles.tile1",
+            "myTiles.tile2",
+            "myTiles.tile3",
+            "myTiles.tile5",
+            "myTiles.tile6",
+            "myTiles.tile7",
+            "myTiles.tile8"
+        ]
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

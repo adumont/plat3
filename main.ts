@@ -81,6 +81,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         mySprite.vy = -150
     }
 })
+scene.onOverlapTile(SpriteKind.Player, myTiles.tile9, function (sprite, location) {
+    game.over(true)
+})
 function createPlayer () {
     mySprite = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -108,6 +111,10 @@ function createPlayer () {
     controller.moveSprite(mySprite, 100, 0)
     mySprite.ay = 300
 }
+scene.onOverlapTile(SpriteKind.Egg, myTiles.tile5, function (sprite, location) {
+    sprite.destroy()
+    newEgg()
+})
 let mySprite: Sprite = null
 let anEgg: Sprite = null
 let aMonkey: Sprite = null

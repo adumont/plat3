@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const Monkey = SpriteKind.create()
+    export const Egg = SpriteKind.create()
 }
 function createLevel () {
     if (Level == 0) {
@@ -7,11 +8,12 @@ function createLevel () {
         tiles.setTilemap(tilemap`level`)
         createPlayer()
         createMonkeys()
+        maxMonkeys = sprites.allOfKind(SpriteKind.Monkey).length
     }
 }
 function createMonkeys () {
     for (let value of tiles.getTilesByType(myTiles.tile2)) {
-        Monkey = sprites.create(img`
+        aMonkey = sprites.create(img`
             . . . . f f f f f . . . . . . . 
             . . . f e e e e e f . . . . . . 
             . . f d d d d e e e f . . . . . 
@@ -29,12 +31,25 @@ function createMonkeys () {
             . f d d f d d f d d b e f f f f 
             . . f f f f f f f f f f f f f . 
             `, SpriteKind.Monkey)
-        tiles.placeOnTile(Monkey, value)
+        tiles.placeOnTile(aMonkey, value)
         tiles.setTileAt(value, myTiles.transparency16)
-        Monkey.setFlag(SpriteFlag.BounceOnWall, true)
-        Monkey.vx = -10
+        aMonkey.setFlag(SpriteFlag.BounceOnWall, true)
+        aMonkey.vx = -10
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Monkey, function (sprite, otherSprite) {
+    // Falling on top of Monkey
+    if (sprite.y < otherSprite.y && sprite.vy > 0) {
+        info.changeScoreBy(5)
+        // rebotar
+        sprite.vy = -80
+        music.baDing.play()
+    } else {
+        scene.cameraShake(3, 200)
+        info.changeLifeBy(-1)
+    }
+    otherSprite.destroy(effects.disintegrate, 200)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.vy == 0 && !(mySprite.tileKindAt(TileDirection.Center, myTiles.tile5))) {
         mySprite.vy = -150
@@ -68,8 +83,10 @@ function createPlayer () {
     mySprite.ay = 300
 }
 let mySprite: Sprite = null
-let Monkey: Sprite = null
+let aMonkey: Sprite = null
+let maxMonkeys = 0
 let Level = 0
+let anEgg = null
 Level = 0
 info.setScore(0)
 info.setLife(4)

@@ -2,6 +2,10 @@ namespace SpriteKind {
     export const Monkey = SpriteKind.create()
     export const Egg = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Egg, myTiles.tile9, function (sprite, location) {
+    sprite.destroy()
+    newEgg()
+})
 function createLevel () {
     if (Level == 0) {
         scene.setBackgroundColor(9)
@@ -42,7 +46,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Monkey, function (sprite, otherS
     if (sprite.y < otherSprite.y && sprite.vy > 0) {
         info.changeScoreBy(5)
         // rebotar
-        sprite.vy = -80
+        sprite.vy = -70
         music.baDing.play()
     } else {
         scene.cameraShake(3, 200)
@@ -71,14 +75,40 @@ function newEgg () {
             . . . . b b d d d d 1 1 . . . . 
             `, SpriteKind.Egg)
         tiles.placeOnRandomTile(anEgg, myTiles.tile3)
-        anEgg.setFlag(SpriteFlag.BounceOnWall, true)
+        anEgg.setFlag(SpriteFlag.BounceOnWall, false)
         anEgg.vy = -150
-        anEgg.ay = 150
+        anEgg.ay = 300
     }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.vy == 0 && !(mySprite.tileKindAt(TileDirection.Center, myTiles.tile5))) {
         mySprite.vy = -150
+    }
+})
+scene.onOverlapTile(SpriteKind.Egg, myTiles.transparency16, function (sprite, location) {
+    if (sprite.isHittingTile(CollisionDirection.Bottom)) {
+        sprite.destroy()
+        aMonkey = sprites.create(img`
+            . . . . f f f f f . . . . . . . 
+            . . . f e e e e e f . . . . . . 
+            . . f d d d d e e e f . . . . . 
+            . c d f d d f d e e f f . . . . 
+            . c d f d d f d e e d d f . . . 
+            c d e e d d d d e e b d c . . . 
+            c d d d d c d d e e b d c . . . 
+            c c c c c d d e e e f c . . . . 
+            . f d d d d e e e f f . . . . . 
+            . . f f f f f e e e e f . . . . 
+            . . . . f f e e e e e e f . f f 
+            . . . f e e f e e f e e f . e f 
+            . . f e e f e e f e e e f . e f 
+            . f b d f d b f b b f e f f e f 
+            . f d d f d d f d d b e f f f f 
+            . . f f f f f f f f f f f f f . 
+            `, SpriteKind.Monkey)
+        tiles.placeOnTile(aMonkey, location)
+        aMonkey.setFlag(SpriteFlag.BounceOnWall, true)
+        aMonkey.vx = -10
     }
 })
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile9, function (sprite, location) {
@@ -108,8 +138,8 @@ function createPlayer () {
     for (let value2 of tiles.getTilesByType(myTiles.tile1)) {
         tiles.setTileAt(value2, myTiles.transparency16)
     }
-    controller.moveSprite(mySprite, 100, 0)
-    mySprite.ay = 300
+    controller.moveSprite(mySprite, playerVelY, 0)
+    mySprite.ay = playerAccelY
 }
 scene.onOverlapTile(SpriteKind.Egg, myTiles.tile5, function (sprite, location) {
     sprite.destroy()
@@ -120,6 +150,10 @@ let anEgg: Sprite = null
 let aMonkey: Sprite = null
 let maxMonkeys = 0
 let Level = 0
+let playerVelY = 0
+let playerAccelY = 0
+playerAccelY = 350
+playerVelY = 50
 Level = 0
 info.setScore(0)
 info.setLife(4)
@@ -173,4 +207,17 @@ game.onUpdate(function () {
             value3.vx = 0 - value3.vx
         }
     }
+})
+// Ladder logic
+game.onUpdate(function () {
+    if (mySprite.tileKindAt(TileDirection.Center, myTiles.tile5) || mySprite.tileKindAt(TileDirection.Center, myTiles.tile6)) {
+        mySprite.ay = 0
+        controller.moveSprite(mySprite, 50, 50)
+    } else {
+        controller.moveSprite(mySprite, playerVelY, 0)
+        mySprite.ay = playerAccelY
+    }
+})
+game.onUpdateInterval(5000, function () {
+    newEgg()
 })
